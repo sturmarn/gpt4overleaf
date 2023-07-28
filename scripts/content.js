@@ -133,7 +133,7 @@ function makeAskHandler(openAI) {
       const selection = window.getSelection();
       const selectedText = selection.toString();
       if (!selectedText) return;
-      const editedText = await openAI.completeText(selectedText);
+      const editedText = await openAI.completeText('In Latex, '+ selectedText);
       replaceSelectedText(editedText, selection);
   }
   chrome.commands.onCommand.addListener(handler);
