@@ -15,6 +15,22 @@
     "48": "popup/icon_48.png",
     "128": "popup/icon_128.png"
   },
+  "commands": {
+    "Complete/Improve": {
+      "suggested_key": {
+        "default": "Alt+Space",
+        "mac": "Option+Space"
+      },
+      "description": "If a text is selected then it will improve existing code. Otherwise, it will try to complete based on last 5 rows."
+    },
+    "Ask GPT": {
+      "suggested_key": {
+        "default": "Alt+a",
+        "mac": "Option+a"
+      },
+      "description": "Use the selected text to ask GPT."
+    },
+  },
   "manifest_version": 3,
   "name": "GPT4Overleaf",
   "permissions": ["storage"],
