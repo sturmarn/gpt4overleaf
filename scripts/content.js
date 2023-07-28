@@ -160,15 +160,10 @@ function setup(apiKey) {
   console.log("GPT4Overleaf: OpenAI API key set, enabling GPT4Overleaf features.");
 
   const openAI = new OpenAIAPI(currentAPIKey);
-  chrome.commands.onCommand.addListener( function(command, tab) {
-    if(command === "Complete/Improve") {
-        
-    } else if(command === "Ask GPT") {
-      
-    }
-  });
+
   cleanupHandlers.push(makeImproveTextHandler(openAI));
-  // cleanupHandlers.push(makeCompleteTextHandler(openAI));
+  cleanupHandlers.push(makeCompleteTextHandler(openAI));
+  cleanupHandlers.push(makeAskHandler(openAI));
 }
 
 setInterval(async () => {
