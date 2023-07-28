@@ -83,9 +83,7 @@ async function settingIsEnabled(setting) {
 }
 
 function makeImproveTextHandler(openAI) {
-  const handler = async (event) => {
-    if (!event.ctrlKey || event.key !== " ") return;
-
+  const handler = function(command, tab) {
     if (!(await settingIsEnabled("textImprovement"))) return;
 
     const selection = window.getSelection();
@@ -99,32 +97,24 @@ function makeImproveTextHandler(openAI) {
     replaceSelectedText(editedText, selection);
   };
 
-  const eventHandler = document.addEventListener("keydown", handler, false);
-  const removeEventHandler = () => document.removeEventListener("keydown", eventHandler);
-
+  chrome.commands.onCommand.addListener(handler);
+  const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
   return removeEventHandler;
 }
 
 function makeCompleteTextHandler(openAI) {
-  const handler = async (event) => {
-    if (!event.ctrlKey || event.key !== "Enter") return;
-
-    if (!(await settingIsEnabled("textCompletion"))) return;
-
-    const selection = window.getSelection();
-    const selectedText = selection.toString();
-
-    if (!selectedText) return;
-
-    event.preventDefault();
-    const editedText = await openAI.completeText(selectedText);
-
-    replaceSelectedText(editedText, selection);
-  };
-
-  const eventHandler = document.addEventListener("keydown", handler, false);
-  const removeEventHandler = () => document.removeEventListener("keydown", eventHandler);
-
+  const handler = function(command, tab) {
+      if(command === "Complete/Improve") {
+        if (!(await settingIsEnabled("textCompletion"))) return;
+        const selection = window.getSelection();
+        const selectedText = selection.toString();
+        if (!selectedText) return;
+        const editedText = await openAI.completeText(selectedText);
+        replaceSelectedText(editedText, selection);
+      }
+  }
+  chrome.commands.onCommand.addListener(handler);
+  const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
   return removeEventHandler;
 }
 
@@ -147,8 +137,15 @@ function setup(apiKey) {
   console.log("GPT4Overleaf: OpenAI API key set, enabling GPT4Overleaf features.");
 
   const openAI = new OpenAIAPI(currentAPIKey);
+  chrome.commands.onCommand.addListener( function(command, tab) {
+    if(command === "Complete/Improve") {
+        
+    } else if(command === "Ask GPT") {
+      
+    }
+  });
   cleanupHandlers.push(makeImproveTextHandler(openAI));
-  cleanupHandlers.push(makeCompleteTextHandler(openAI));
+  // cleanupHandlers.push(makeCompleteTextHandler(openAI));
 }
 
 setInterval(async () => {
