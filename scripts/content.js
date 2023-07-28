@@ -1,5 +1,5 @@
 class OpenAIAPI {
-  static defaultModel = "text-curie-001";
+  static defaultModel = "text-davinci-003";
 
   constructor(apiKey) {
     this.apiKey = apiKey;
@@ -40,7 +40,7 @@ class OpenAIAPI {
 
     const result = await this.query("completions", data);
 
-    return text + result[0].text;
+    return result[0].text;
   }
 
   async improveText(text) {
@@ -82,19 +82,28 @@ async function settingIsEnabled(setting) {
   return result[setting];
 }
 
+function commentText(text) {
+  const regexPattern = /\n/g;
+  const replacementString = "\n%";
+  let comment = text.replace(regexPattern, replacementString);
+  if (!comment.startsWith("%")) {
+    comment = '%' + comment;
+  }
+  return comment;
+}
+
 function makeImproveTextHandler(openAI) {
   const handler = function(command, tab) {
+    if(command !=== 'Improve') return;
     if (!(await settingIsEnabled("textImprovement"))) return;
 
     const selection = window.getSelection();
     const selectedText = selection.toString();
-
     if (!selectedText) return;
 
-    event.preventDefault();
     const editedText = await openAI.improveText(selectedText);
-
-    replaceSelectedText(editedText, selection);
+    const commentedText = commentText(selectedText);
+    replaceSelectedText(commentedText + "\n" + editedText, selection);
   };
 
   chrome.commands.onCommand.addListener(handler);
@@ -104,14 +113,13 @@ function makeImproveTextHandler(openAI) {
 
 function makeCompleteTextHandler(openAI) {
   const handler = function(command, tab) {
-      if(command === "Complete/Improve") {
-        if (!(await settingIsEnabled("textCompletion"))) return;
-        const selection = window.getSelection();
-        const selectedText = selection.toString();
-        if (!selectedText) return;
-        const editedText = await openAI.completeText(selectedText);
-        replaceSelectedText(editedText, selection);
-      }
+      if(command !== "Complete") return;
+      if (!(await settingIsEnabled("textCompletion"))) return;
+      const selection = window.getSelection();
+      const selectedText = selection.toString();
+      if (!selectedText) return;
+      const editedText = await openAI.completeText(selectedText);
+      replaceSelectedText(selectedText + editedText, selection);
   }
   chrome.commands.onCommand.addListener(handler);
   const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
