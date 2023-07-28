@@ -18,22 +18,19 @@
   "commands": {
     "Complete": {
       "suggested_key": {
-        "default": "Alt+c",
-        "mac": "Option+c"
+        "default": "Alt+C"
       },
       "description": "Complete selected text"
     },
     "Improve": {
       "suggested_key": {
-        "default": "Alt+i",
-        "mac": "Option+i"
+        "default": "Alt+I"
       },
       "description": "Improve selected text"
     },
     "Ask": {
       "suggested_key": {
-        "default": "Alt+a",
-        "mac": "Option+a"
+        "default": "Alt+A"
       },
       "description": "Use the selected text to ask GPT. It adds to the beginning of the selected text: 'In Latex, '"
     }
