@@ -16,14 +16,21 @@
     "128": "popup/icon_128.png"
   },
   "commands": {
-    "Complete/Improve": {
+    "Complete": {
       "suggested_key": {
-        "default": "Alt+Space",
-        "mac": "Option+Space"
+        "default": "Alt+c",
+        "mac": "Option+c"
       },
-      "description": "If a text is selected then it will improve existing code. Otherwise, it will try to complete based on last 5 rows."
+      "description": "Complete selected text"
     },
-    "Ask GPT": {
+    "Improve": {
+      "suggested_key": {
+        "default": "Alt+i",
+        "mac": "Option+i"
+      },
+      "description": "Improve selected text"
+    },
+    "Ask": {
       "suggested_key": {
         "default": "Alt+a",
         "mac": "Option+a"
