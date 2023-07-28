@@ -93,7 +93,7 @@ function commentText(text) {
 }
 
 function makeImproveTextHandler(openAI) {
-  const handler = await (command, tab) => {
+  const handler = async (command, tab) => {
     if(command !== 'Improve') return;
     if (!(await settingIsEnabled("textImprovement"))) return;
 
@@ -112,7 +112,7 @@ function makeImproveTextHandler(openAI) {
 }
 
 function makeCompleteTextHandler(openAI) {
-  const handler = await (command, tab) => {
+  const handler = async (command, tab) => {
       if(command !== "Complete") return;
       if (!(await settingIsEnabled("textCompletion"))) return;
       const selection = window.getSelection();
@@ -127,7 +127,7 @@ function makeCompleteTextHandler(openAI) {
 }
 
 function makeAskHandler(openAI) {
-  const handler = await (command, tab) => {
+  const handler = async (command, tab) => {
     console.log('1')
     if(command !== "Ask") return;
     if (!(await settingIsEnabled("textAsk"))) return;
