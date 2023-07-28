@@ -126,6 +126,21 @@ function makeCompleteTextHandler(openAI) {
   return removeEventHandler;
 }
 
+function makeAskHandler(openAI) {
+  const handler = function(command, tab) {
+      if(command !== "Ask") return;
+      if (!(await settingIsEnabled("textAsk"))) return;
+      const selection = window.getSelection();
+      const selectedText = selection.toString();
+      if (!selectedText) return;
+      const editedText = await openAI.completeText(selectedText);
+      replaceSelectedText(editedText, selection);
+  }
+  chrome.commands.onCommand.addListener(handler);
+  const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
+  return removeEventHandler;
+}
+
 let currentAPIKey;
 let cleanupHandlers = [];
 
