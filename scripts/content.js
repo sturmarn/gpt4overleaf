@@ -93,7 +93,7 @@ function commentText(text) {
 }
 
 function makeImproveTextHandler(openAI) {
-  const handler = (command, tab) => {
+  const handler = await (command, tab) => {
     if(command !== 'Improve') return;
     if (!(await settingIsEnabled("textImprovement"))) return;
 
@@ -106,13 +106,13 @@ function makeImproveTextHandler(openAI) {
     replaceSelectedText(commentedText + "\n" + editedText, selection);
   };
 
-  chrome.commands.onCommand.addListener(await handler);
+  chrome.commands.onCommand.addListener(handler);  
   const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
   return removeEventHandler;
 }
 
 function makeCompleteTextHandler(openAI) {
-  const handler = (command, tab) => {
+  const handler = await (command, tab) => {
       if(command !== "Complete") return;
       if (!(await settingIsEnabled("textCompletion"))) return;
       const selection = window.getSelection();
@@ -121,13 +121,13 @@ function makeCompleteTextHandler(openAI) {
       const editedText = await openAI.completeText(selectedText);
       replaceSelectedText(selectedText + editedText, selection);
   }
-  chrome.commands.onCommand.addListener(await handler);
+  chrome.commands.onCommand.addListener(handler);  
   const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
   return removeEventHandler;
 }
 
 function makeAskHandler(openAI) {
-  const handler = (command, tab) => {
+  const handler = await (command, tab) => {
     console.log('1')
     if(command !== "Ask") return;
     if (!(await settingIsEnabled("textAsk"))) return;
@@ -139,7 +139,7 @@ function makeAskHandler(openAI) {
     console.log('4')
     replaceSelectedText(editedText, selection);
   }
-  chrome.commands.onCommand.addListener(await handler);
+  chrome.commands.onCommand.addListener(handler);  
   const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
   return removeEventHandler;
 }
