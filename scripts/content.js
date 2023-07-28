@@ -94,13 +94,15 @@ function commentText(text) {
 
 function makeImproveTextHandler(openAI) {
   const handler = async (command, tab) => {
+    console.log('i1')
     if(command !== 'Improve') return;
     if (!(await settingIsEnabled("textImprovement"))) return;
-
+    console.log('i2')
     const selection = window.getSelection();
     const selectedText = selection.toString();
     if (!selectedText) return;
 
+    console.log('i3')
     const editedText = await openAI.improveText(selectedText);
     const commentedText = commentText(selectedText);
     replaceSelectedText(commentedText + "\n" + editedText, selection);
@@ -113,8 +115,11 @@ function makeImproveTextHandler(openAI) {
 
 function makeCompleteTextHandler(openAI) {
   const handler = async (command, tab) => {
+      console.log('c1')
       if(command !== "Complete") return;
+    console.log('c2')
       if (!(await settingIsEnabled("textCompletion"))) return;
+    console.log('c3')
       const selection = window.getSelection();
       const selectedText = selection.toString();
       if (!selectedText) return;
@@ -128,15 +133,15 @@ function makeCompleteTextHandler(openAI) {
 
 function makeAskHandler(openAI) {
   const handler = async (command, tab) => {
-    console.log('1')
+    console.log('a1')
     if(command !== "Ask") return;
     if (!(await settingIsEnabled("textAsk"))) return;
-    console.log('2')
+    console.log('a2')
     const selection = window.getSelection();
     const selectedText = selection.toString();
     if (!selectedText) return;
     const editedText = await openAI.completeText('In Latex, '+ selectedText);
-    console.log('4')
+    console.log('a3')
     replaceSelectedText(editedText, selection);
   }
   chrome.commands.onCommand.addListener(handler);  
