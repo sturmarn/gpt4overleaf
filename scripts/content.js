@@ -94,7 +94,7 @@ function commentText(text) {
 
 function makeImproveTextHandler(openAI) {
   const handler = function(command, tab) {
-    if(command !=== 'Improve') return;
+    if(command !== 'Improve') return;
     if (!(await settingIsEnabled("textImprovement"))) return;
 
     const selection = window.getSelection();
