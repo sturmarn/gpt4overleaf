@@ -8,12 +8,16 @@
     <h1 class="extension-title">GPT4Overleaf</h1>
     <div id="controls" class="form-container">
       <div class="control">
-        <div class="input"><span>CTRL</span><span>Space</span></div>
+        <div class="input"><span>ALT</span><span>I</span></div>
         <div class="effect">Improve selected text.</div>
       </div>
       <div class="control">
-        <div class="input"><span>CTRL</span><span>Enter</span></div>
+        <div class="input"><span>ALT</span><span>C</span></div>
         <div class="effect">Complete selected text.</div>
+      </div>
+      <div class="control">
+        <div class="input"><span>ALT</span><span>A</span></div>
+        <div class="effect">Ask GPT.</div>
       </div>
     </div>
     <div id="settings-form" class="form-container">
@@ -30,6 +34,13 @@
           <div class="settings-item-text">Text Completion</div>
           <label class="switch">
             <input name="text-completion" class="settings-item-checkbox" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="settings-item">
+          <div class="settings-item-text">ASK GPT</div>
+          <label class="switch">
+            <input name="text-ask" class="settings-item-checkbox" type="checkbox" />
             <span class="slider round"></span>
           </label>
         </div>
