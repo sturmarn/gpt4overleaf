@@ -3,6 +3,7 @@ const apiKeyRegex = /sk-[a-zA-Z0-9]{48}/;
 const settings = [
   { key: "textCompletion", name: "text-completion" },
   { key: "textImprovement", name: "text-improvement" },
+  { key: "textAsk", name: "text-ask" },
 ];
 
 function addMessage(message) {
