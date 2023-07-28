@@ -128,13 +128,16 @@ function makeCompleteTextHandler(openAI) {
 
 function makeAskHandler(openAI) {
   const handler = async (command, tab) => {
-      if(command !== "Ask") return;
-      if (!(await settingIsEnabled("textAsk"))) return;
-      const selection = window.getSelection();
-      const selectedText = selection.toString();
-      if (!selectedText) return;
-      const editedText = await openAI.completeText('In Latex, '+ selectedText);
-      replaceSelectedText(editedText, selection);
+    console.log('1')
+    if(command !== "Ask") return;
+    if (!(await settingIsEnabled("textAsk"))) return;
+    console.log('2')
+    const selection = window.getSelection();
+    const selectedText = selection.toString();
+    if (!selectedText) return;
+    const editedText = await openAI.completeText('In Latex, '+ selectedText);
+    console.log('4')
+    replaceSelectedText(editedText, selection);
   }
   chrome.commands.onCommand.addListener(handler);
   const removeEventHandler = () => chrome.commands.onCommand.removeListener(handler);
