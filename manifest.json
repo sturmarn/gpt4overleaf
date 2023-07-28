@@ -36,7 +36,7 @@
         "mac": "Option+a"
       },
       "description": "Use the selected text to ask GPT. It adds to the beginning of the selected text: 'In Latex, '"
-    },
+    }
   },
   "manifest_version": 3,
   "name": "GPT4Overleaf",
