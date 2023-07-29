@@ -164,13 +164,6 @@ function setup(apiKey) {
   addListener('Complete', makeCompleteTextHandler(openAI));
   addListener('Ask', makeAskHandler(openAI));
 }
-
-setInterval(async () => {
-  try {
-    await chrome.storage.local.get("openAIAPIKey").then(({ openAIAPIKey }) => setup(openAIAPIKey));
-  } catch (error) {
-  }
-}, 1000);
           
 function addListener(commandName, func) {
   chrome.commands.onCommand.addListener((command) => {
@@ -180,4 +173,9 @@ function addListener(commandName, func) {
       func(tabs[0]);
     });
   });
+}
+
+try {
+  await chrome.storage.local.get("openAIAPIKey").then(({ openAIAPIKey }) => setup(openAIAPIKey));
+} catch (error) {
 }
