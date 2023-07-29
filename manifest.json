@@ -35,8 +35,11 @@
       "description": "Use the selected text to ask GPT. It adds to the beginning of the selected text: 'In Latex, '"
     }
   },
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
   "manifest_version": 3,
   "name": "GPT4Overleaf",
-  "permissions": ["storage"],
   "version": "1.0.1"
 }
