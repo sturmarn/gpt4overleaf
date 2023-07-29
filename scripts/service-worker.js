@@ -149,7 +149,6 @@ function cleanup() {
 }
 
 function setup(apiKey) {
-  console.log('GPT4Overleaf: Entered setup with key=' + apiKey);
   if (currentAPIKey === apiKey) return;
 
   cleanup();
