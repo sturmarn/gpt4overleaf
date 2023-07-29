@@ -176,6 +176,6 @@ function addListener(commandName, func) {
 }
 
 try {
-  await chrome.storage.local.get("openAIAPIKey").then(({ openAIAPIKey }) => setup(openAIAPIKey));
+  chrome.storage.local.get("openAIAPIKey").then(({ openAIAPIKey }) => setup(openAIAPIKey));
 } catch (error) {
 }
