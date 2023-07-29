@@ -142,10 +142,10 @@ function makeAskHandler(openAI) {
 
 let currentAPIKey;
 
-function clean() {
-  chrome.commands.onCommand.addListener('Improve');
-  chrome.commands.onCommand.addListener('Complete');
-  chrome.commands.onCommand.addListener('Ask');
+function cleanup() {
+  chrome.commands.onCommand.removeListener('Improve');
+  chrome.commands.onCommand.removeListener('Complete');
+  chrome.commands.onCommand.removeListener('Ask');
 }
 
 function setup(apiKey) {
