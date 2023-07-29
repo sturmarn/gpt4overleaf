@@ -149,6 +149,7 @@ function cleanup() {
 }
 
 function setup(apiKey) {
+  console.log('GPT4Overleaf: Entered setup with key=' + apiKey);
   if (currentAPIKey === apiKey) return;
 
   cleanup();
@@ -176,6 +177,8 @@ function addListener(commandName, func) {
 }
 
 try {
+  console.log('started gpt4overleaf');
   chrome.storage.local.get("openAIAPIKey").then(({ openAIAPIKey }) => setup(openAIAPIKey));
 } catch (error) {
+  console.error('GPT4Overleaf: ' + error);
 }
