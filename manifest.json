@@ -5,7 +5,7 @@
   },
   "content_scripts": [
     {
-      "js": ["scripts/jquery.js", "scripts/content.js"],
+      "js": ["scripts/jquery.js" /*, "scripts/content.js"*/],
       "matches": ["https://*.overleaf.com/project/*"]
     }
   ],
