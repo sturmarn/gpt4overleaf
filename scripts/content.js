@@ -76,9 +76,6 @@ async function settingIsEnabled(setting) {
   } catch (error) {
     return false
   }
-
-  console.log(result)
-
   return result[setting]
 }
 
@@ -93,23 +90,17 @@ function commentText(text) {
 }
 
 async function improveTextHandler(openAI) {
-  console.log('i1')
   if (!(await settingIsEnabled('textImprovement'))) return
-  console.log('i2')
   const selection = window.getSelection()
   const selectedText = selection.toString()
   if (!selectedText) return
-  console.log('i3')
   const editedText = await openAI.improveText(selectedText)
   const commentedText = commentText(selectedText)
   replaceSelectedText(commentedText + '\n' + editedText, selection)
 }
 
 async function completeTextHandler(openAI) {
-  console.log('c1')
-  console.log('c2')
   if (!(await settingIsEnabled('textCompletion'))) return
-  console.log('c3')
   const selection = window.getSelection()
   const selectedText = selection.toString()
   if (!selectedText) return
@@ -118,14 +109,11 @@ async function completeTextHandler(openAI) {
 }
 
 async function askHandler(openAI) {
-  console.log('a1')
   if (!(await settingIsEnabled('textAsk'))) return
-  console.log('a2')
   const selection = window.getSelection()
   const selectedText = selection.toString()
   if (!selectedText) return
   const editedText = await openAI.completeText('In Latex, ' + selectedText)
-  console.log('a3')
   replaceSelectedText(editedText, selection)
 }
 
@@ -141,10 +129,10 @@ function setAPIKey(key) {
   currentAPIKey = key
   if (currentAPIKey) {
     openAI = new OpenAIAPI(currentAPIKey)
-    console.log('GPT4Overleaf: OpenAI API key set, enabling GPT4Overleaf features.')
+    console.log('AI4Overleaf: OpenAI API key set, enabling AI4Overleaf features.')
   } else {
     openAI = undefined
-    console.log('GPT4Overleaf: OpenAI API key is not set, GPT4Overleaf features are disabled.')
+    console.log('AI4Overleaf: OpenAI API key is not set, AI4Overleaf features are disabled.')
   }
 }
 

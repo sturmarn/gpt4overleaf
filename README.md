@@ -4,6 +4,12 @@ It is a work in progress.
 
 The plugin has been forked from [GPT4Overleaf](https://github.com/e3ntity/gpt4overleaf).
 
+## Installation
+1. Clone the repository
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable developer mode
+4. Click "Load unpacked" and select the repository folder
+
 ## Configuration
 The plugin can be configured by clicking the plugin button in the Chrome toolbar. It requires inserting an API key from [OpenAI](https://platform.openai.com/account/api-keys). You also need to choose which tools you wish to enable.
 
