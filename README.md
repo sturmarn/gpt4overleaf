@@ -40,7 +40,7 @@ Entry 7 & Entry 8 & Entry 9\\
 \end{tabular}
 ```
 
-You can then, e.g.:
+You can then, for example:
 1. Write before the table: Place the following tabular inside a table environment, center it, and give the following title: "The comparison of the three approaches"
 2. Select the sentence and the table
 3. Press `Alt+a` to trigger the ask tool. 
